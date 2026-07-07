@@ -20,7 +20,7 @@ class AgentState(BaseModel):
 
     needs_escalation: bool = False
     reason_for_escalation: str | None = None
-
+    
     customer_response_draft: str | None = None
 
     confidence: float | None = None
