@@ -1,0 +1,105 @@
+{
+  "entries": [
+    {
+      "id": "kb-001",
+      "category": "authentication",
+      "keywords": ["auth", "authentication", "token", "login", "credential", "401", "unauthorized", "expired key", "api key"],
+      "likely_causes": [
+        "Expired or rotated API credentials",
+        "Service account token not refreshed after config change",
+        "IAM role/permission change removed auth scope"
+      ],
+      "standard_fix": "Verify the service account/API key used by the job is still valid and has not been rotated. Re-issue credentials and re-deploy the config referencing the new secret.",
+      "severity_hint": "high",
+      "base_confidence": 0.85
+    },
+    {
+      "id": "kb-002",
+      "category": "network",
+      "keywords": ["network", "timeout", "connection refused", "unreachable", "dns", "firewall", "vpc", "connectivity"],
+      "likely_causes": [
+        "Firewall or security group rule blocking egress after infra change",
+        "DNS resolution failure for internal service",
+        "VPC peering or subnet routing change"
+      ],
+      "standard_fix": "Check recent firewall/security group changes and confirm the job's network path (VPC, subnet, security group) still allows the required egress/ingress.",
+      "severity_hint": "high",
+      "base_confidence": 0.8
+    },
+    {
+      "id": "kb-003",
+      "category": "data_permissions",
+      "keywords": ["permission", "access denied", "403", "forbidden", "acl", "role", "policy", "read access", "write access"],
+      "likely_causes": [
+        "IAM/ACL policy change removed read/write access to a data source",
+        "Service account not added to a new resource's access policy",
+        "Data source ownership changed"
+      ],
+      "standard_fix": "Confirm the job's service account is present in the data source's access policy/ACL. Re-grant the required role and re-run.",
+      "severity_hint": "medium",
+      "base_confidence": 0.8
+    },
+    {
+      "id": "kb-004",
+      "category": "deployment_config",
+      "keywords": ["config", "configuration change", "deploy", "deployment", "yaml", "env variable", "environment variable", "misconfigured"],
+      "likely_causes": [
+        "Recent configuration change introduced an invalid or missing parameter",
+        "Environment variable not propagated to new deployment",
+        "Config schema mismatch between versions"
+      ],
+      "standard_fix": "Diff the current config against the last known-good config. Roll back the change or correct the invalid parameter, then redeploy.",
+      "severity_hint": "medium",
+      "base_confidence": 0.75
+    },
+    {
+      "id": "kb-005",
+      "category": "database_timeout",
+      "keywords": ["database", "db timeout", "query timeout", "slow query", "deadlock", "connection pool"],
+      "likely_causes": [
+        "Connection pool exhaustion under load",
+        "Long-running query blocking other transactions",
+        "Database resource limits (CPU/IOPS) reached"
+      ],
+      "standard_fix": "Check DB connection pool metrics and slow query logs. Scale resources or optimize the offending query.",
+      "severity_hint": "medium",
+      "base_confidence": 0.75
+    },
+    {
+      "id": "kb-006",
+      "category": "rate_limiting",
+      "keywords": ["rate limit", "429", "throttle", "quota exceeded", "too many requests"],
+      "likely_causes": [
+        "Upstream API quota exceeded due to increased call volume",
+        "Missing backoff/retry logic causing repeated throttling"
+      ],
+      "standard_fix": "Check upstream API usage against quota. Implement exponential backoff or request a quota increase.",
+      "severity_hint": "low",
+      "base_confidence": 0.8
+    },
+    {
+      "id": "kb-007",
+      "category": "ssl_certificate",
+      "keywords": ["ssl", "tls", "certificate", "cert expired", "handshake failed"],
+      "likely_causes": [
+        "Expired TLS certificate on internal or external endpoint",
+        "Certificate chain misconfiguration after rotation"
+      ],
+      "standard_fix": "Check certificate expiry on the affected endpoint and renew/rotate. Verify the full chain is correctly installed.",
+      "severity_hint": "high",
+      "base_confidence": 0.85
+    },
+    {
+      "id": "kb-008",
+      "category": "disk_space",
+      "keywords": ["disk space", "disk full", "no space left", "storage limit"],
+      "likely_causes": [
+        "Log or temp file buildup consuming disk",
+        "Storage volume undersized for current workload"
+      ],
+      "standard_fix": "Clear old logs/temp files or expand the storage volume. Add monitoring/alerting on disk usage.",
+      "severity_hint": "medium",
+      "base_confidence": 0.8
+    }
+  ]
+}
