@@ -1,6 +1,6 @@
 import json
 import os
-from agent.models import KnowledgeMatch
+from agent.models.knowledge import KnowledgeMatch
 
 KB_PATH = "data/kb.json"
 
@@ -78,7 +78,7 @@ def search_knowledge_base(ticket_text, top_k=2):
 
     # highest matching entries first
     results.sort(
-        key=lambda x: x["score"],
+        key=lambda x: x.score,
         reverse=True
     )
     return results[:top_k]

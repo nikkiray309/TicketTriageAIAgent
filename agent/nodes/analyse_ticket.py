@@ -1,7 +1,8 @@
 import json
 import ollama
 
-from agent.state import AgentState
+
+from agent.models.state import AgentState
 from agent.prompts import SYSTEM_PROMPT
 
 
@@ -45,7 +46,7 @@ class AnalyzeTicketNode:
         result = json.loads(
             response["message"]["content"]
         )
-
+        print("AnalyzeTicketNode result:", result)
         state.summary = result["summary"]
         state.issue_type = result["issue_type"]
         state.confidence = result["confidence"]
