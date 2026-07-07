@@ -3,7 +3,7 @@ from agent.models.state import AgentState
 from agent.nodes.planner import PlannerNode
 
 from tools.knowledge_search import search_knowledge_base
-
+from tools.severity import calculate_severity
 
 def run_agent(ticket: str):
 
@@ -24,6 +24,12 @@ def run_agent(ticket: str):
         state.kb_results = search_knowledge_base(
             state.ticket
         )
+        severity_result = calculate_severity(
+        state.ticket,
+        state.kb_results
+    )
 
+        state.severity = severity_result["severity"]
+        state.severity_reason = severity_result["reason"]
 
     return state

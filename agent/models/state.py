@@ -15,6 +15,7 @@ class AgentState(BaseModel):
     planner_reason: str | None = None
 
     severity: str | None = None
+    severity_reason: str | None = None
     recommended_next_steps: list[str] = Field(default_factory=list)
 
     needs_escalation: bool = False
