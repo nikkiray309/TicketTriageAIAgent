@@ -14,7 +14,6 @@ class PlannerNode:
 
 
         # Technical troubleshooting requires KB lookup
-
         if issue in [
             "authentication",
             "network",

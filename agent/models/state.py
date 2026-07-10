@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from agent.models.knowledge import KnowledgeMatch
+from agent.models.validation import ValidationIssue
 
 class AgentState(BaseModel):
 
@@ -20,7 +21,7 @@ class AgentState(BaseModel):
 
     needs_escalation: bool = False
     reason_for_escalation: str | None = None
-    
+
     customer_response_draft: str | None = None
 
     confidence: float | None = None
@@ -29,6 +30,11 @@ class AgentState(BaseModel):
 
     human_review_required: bool = False
 
+    #Guardrails
+    validation_issues: list[ValidationIssue] = Field(default_factory=list)
+    validation_passed: bool = True
+
+    
 # class AgentState(BaseModel):
 #     """
 #     Shared state that flows through the entire agent workflow.
