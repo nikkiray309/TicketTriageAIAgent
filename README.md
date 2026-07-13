@@ -27,8 +27,6 @@ The goal of this agent is:
 - Output validation
 - Streamlit interface
 
----
-
 
 ---
 
