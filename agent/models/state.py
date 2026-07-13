@@ -15,10 +15,11 @@ class AgentState(BaseModel):
     should_search_kb: bool = False
     planner_reason: str | None = None
 
+
     severity: str | None = None
     severity_reason: str | None = None
+    
     recommended_next_steps: list[str] = Field(default_factory=list)
-
     needs_escalation: bool = False
     reason_for_escalation: str | None = None
 
@@ -34,7 +35,7 @@ class AgentState(BaseModel):
     validation_issues: list[ValidationIssue] = Field(default_factory=list)
     validation_passed: bool = True
 
-    
+
 # class AgentState(BaseModel):
 #     """
 #     Shared state that flows through the entire agent workflow.

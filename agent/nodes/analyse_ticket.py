@@ -1,7 +1,5 @@
 import json
 import ollama
-
-
 from agent.models.state import AgentState
 from agent.prompts import SYSTEM_PROMPT
 
