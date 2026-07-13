@@ -15,16 +15,13 @@ class EscalationNode:
         )
 
         if severity == "critical":
-
             state.needs_escalation = True
             state.reason_for_escalation = (
                 "Critical severity detected. "
                 "Immediate human intervention required."
             )
 
-
         elif severity == "high":
-
             state.needs_escalation = True
             state.reason_for_escalation = (
                 "High severity technical issue. "

@@ -11,15 +11,10 @@ from tools.severity import calculate_severity
 def run_agent(ticket: str):
 
     state = AgentState(ticket=ticket)
-
     # Node 1
     state = AnalyzeTicketNode().run(state)
-
-
     # Node 2
     state = PlannerNode().run(state)
-
-
     # Tool call decision
     if state.should_search_kb:
 

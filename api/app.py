@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI  # type: ignore[import]
 from api.routes import router
 
 app = FastAPI(
@@ -14,6 +14,5 @@ def root():
         "status": "running",
         "version": "1.0.0"
     }
-
 
 app.include_router(router)

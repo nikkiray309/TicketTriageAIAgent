@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
-
 class KnowledgeMatch(BaseModel):
     id: str
     category: str

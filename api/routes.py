@@ -1,5 +1,5 @@
 from datetime import datetime
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException #       # type: ignore[import]
 from api.services import build_ticket_response
 from api.schemas import (
     TicketRequest,

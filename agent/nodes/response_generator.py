@@ -1,6 +1,7 @@
 import json
 import ollama
 
+from agent.models import state
 from agent.models.state import AgentState
 from agent.prompts import RESPONSE_GENERATION_PROMPT
 
@@ -9,7 +10,6 @@ class ResponseGeneratorNode:
 
     def __init__(self, model="llama2-uncensored"):
         self.model = model
-
 
     def run(self, state: AgentState):
         kb_context = []
@@ -27,18 +27,14 @@ class ResponseGeneratorNode:
 Customer Ticket:
 {state.ticket}
 
-
 Knowledge Base Evidence:
 {json.dumps(kb_context, indent=2)}
-
 
 Severity:
 {state.severity}
 
-
 Escalation Required:
 {state.needs_escalation}
-
 
 Generate the final support response.
 """
@@ -64,10 +60,16 @@ Generate the final support response.
             response["message"]["content"]
         )
 
-
-        state.recommended_next_steps = (
-            result["recommended_next_steps"]
-        )
+        if kb_context:
+            state.recommended_next_steps = kb_context[0]["fix"]
+        else:
+            state.recommended_next_steps = (
+                "Insufficient information available. "
+                "Please collect additional troubleshooting details."
+            )
+        # state.recommended_next_steps = (
+        #     result["recommended_next_steps"]
+        # )
 
 
         state.customer_response_draft = (

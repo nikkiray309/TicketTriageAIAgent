@@ -27,7 +27,6 @@ Rules:
 Return JSON:
 
 {
-    "recommended_next_steps": [],
     "customer_response_draft": ""
 }
 """

@@ -9,10 +9,8 @@ def load_knowledge_base():
     """
     Load knowledge base from JSON file.
     """
-
     with open(KB_PATH, "r") as file:
         data = json.load(file)
-
     return data["entries"]
 
 
@@ -30,20 +28,17 @@ def search_knowledge_base(ticket_text, top_k=2):
     """
 
     entries = load_knowledge_base()
-
     ticket_text = ticket_text.lower()
 
     results = []
 
 
     for entry in entries:
-
         score = 0
         matched_keywords = []
 
 
         for keyword in entry["keywords"]:
-
             if keyword.lower() in ticket_text:
                 score += 1
                 matched_keywords.append(keyword)
