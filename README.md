@@ -82,9 +82,11 @@ Production job has been failing since yesterday after an API key change.
 ```json
 {
  "summary":"Production job authentication failure",
- "issue_type":"authentication",
+ "issue_type":"API",
  "severity":"high",
  "recommended_next_steps":
- "Verify API credentials and redeploy configuration",
- "needs_escalation":true
+ "Verify the service account/API key used by the job is still valid and has not been rotated. Re-issue credentials and re-deploy the config referencing the new secret.",
+ "needs_escalation":true,
+ "customer_response": "Please verify the service account/API key used by the job is still valid and has not been rotated. Re-issue credentials and re-deploy the config referencing the new secret.",
+ "validation": passed
 }```
