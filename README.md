@@ -16,6 +16,12 @@ The goal of this agent is:
 
 ---
 
+# Architecture
+
+![Architecture Diagram](Architecture.png)
+
+---
+
 # Features
 
 - Customer ticket analysis
